@@ -3,6 +3,7 @@
 
 var chalk = require('chalk');
 var inquirer = require('inquirer');
+var path = require('path');
 
 inquirer
   .prompt([
@@ -10,7 +11,7 @@ inquirer
       {
         type: 'input',
         name: 'type',
-        message: `${chalk.magenta(' What your child-process is aimed at? ')}`,
+        message: `${chalk.magenta(' What\'s your child-process aimed at?')}`,
         default: 'server'
       },
       // {
@@ -22,11 +23,17 @@ inquirer
    
   ])
   .then(answers => {
-     require('./task').run('ex1')
-     const { rename } = require('slimz');
+     const { rename,copy } = require('slimz');
      async function Task_Rename(){
-       await rename('./child.js','child_'+answers.type+'.js')
-       await rename('./parent.js','parent_'+answers.type+'.js')
+       try{
+         let From = path.resolve(__dirname,'../temp/'+'ex1'+'/');
+         let To = './';
+         await copy(From,To);
+         await rename('./child.js','child_'+answers.type+'.js')
+         await rename('./parent.js','parent_'+answers.type+'.js')
+       }catch(err){
+         console.log(err)
+       }
      }
      Task_Rename()
   })
