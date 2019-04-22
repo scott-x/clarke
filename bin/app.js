@@ -24,9 +24,9 @@ inquirer
   .then(answers => {
      require('./task').run('ex1')
      const { rename } = require('slimz');
-     async function rename(){
+     async function Task_Rename(){
        await rename('./child.js','child_'+answers.type+'.js')
        await rename('./parent.js','parent_'+answers.type+'.js')
      }
-     rename()
+     Task_Rename()
   })
