@@ -1,6 +1,6 @@
 {
   "name": "clarke",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A cli tools",
   "bin": {
     "child-process": "./bin/app.js"
