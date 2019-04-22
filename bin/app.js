@@ -10,8 +10,8 @@ inquirer
       {
         type: 'input',
         name: 'type',
-        message: `${chalk.magenta(' Your child-process file name: ')}`,
-        default: 'child.js'
+        message: `${chalk.magenta(' What your child-process is aimed at? ')}`,
+        default: 'server'
       },
       // {
       //   type: 'input',
@@ -23,4 +23,10 @@ inquirer
   ])
   .then(answers => {
      require('./task').run('ex1')
+     const { rename } = require('slimz');
+     async function rename(){
+       await rename('./child.js','child_'+answers.type+'.js')
+       await rename('./parent.js','parent_'+answers.type+'.js')
+     }
+     rename()
   })
